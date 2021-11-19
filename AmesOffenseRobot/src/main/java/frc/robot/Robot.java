@@ -15,7 +15,7 @@ import frc.robot.biblioteca.RoboBaseClass;
  */
 public class Robot extends TimedRobot 
 {
-  WestCoastChassis m_theChassis;
+  MecanumChassis m_theChassis;
   NewJoystick m_theJoystick;
   Human m_theHuman;
 
@@ -37,7 +37,7 @@ public class Robot extends TimedRobot
 //    SmartDashboard.putNumber("Helix Button", 3);
 //    SmartDashboard.putNumber("Joystick Deadzones", 0.25);
 
-    m_theChassis = new WestCoastChassis();
+    m_theChassis = new MecanumChassis();
     m_theJoystick = new NewJoystick();
     m_theHuman = new Human(m_theChassis, m_theJoystick);
   }
@@ -49,7 +49,7 @@ public class Robot extends TimedRobot
   public void initSubsystems()
   {
     m_theJoystick.newJoystickInit();
-    m_theChassis.westCoastChassisInit();
+    m_theChassis.mecanumChassisInit();
   }
 
   /**
