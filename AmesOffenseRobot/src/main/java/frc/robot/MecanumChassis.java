@@ -7,11 +7,23 @@ public class MecanumChassis
 /**
     An enum with three commands to move the robot.
      */
-    enum chassisCommands
+    public enum chassisCommands
     {
         MOVEFORWARD,
         MOVEBACKWARD,
         DONOTHING
+    }
+    public enum rotateCommands
+    {
+        TURNRIGHT,
+        TURNLEFT,
+        NOROTATE
+    }
+    public enum strafeCommands
+    {
+        STRAFELEFT,
+        STRAFERIGHT,
+        NOSTRAFE
     }
 
     MecanumDrive m_driveTrain;
@@ -25,6 +37,8 @@ public class MecanumChassis
     double twistVal = 0.0;
     double strafeVal = 0.0;
     chassisCommands m_currentCommand = chassisCommands.DONOTHING;
+    rotateCommands m_rotateCommand = rotateCommands.NOROTATE;
+    strafeCommands m_strafeCommand = strafeCommands.NOSTRAFE;
     double m_commandParameter = 0.0;
     
     /**
@@ -81,7 +95,24 @@ public class MecanumChassis
     
     public void chassisRotateActions()
     {
-        
+        switch (m_rotateCommand) {
+            case TURNRIGHT:
+                m_driveTrain.setTwist(-m_rotateParameter);
+                m_driveTrain.setInvertRight(false);
+                m_driveTrain.setInvertLeft(false);
+                break;
+            case TURNLEFT:
+                m_driveTrain.setTwist(-m_rotateParameter);
+                m_driveTrain.setInvertRight(true);
+                m_driveTrain.setInvertLeft(true);
+                break;
+            default:
+            case NOROTATE:
+                m_driveTrain.setTwist(0.0);
+                m_driveTrain.setInvertRight(false);
+                m_driveTrain.setInvertLeft(false);
+                break;        
+        }
     }
 
     /**
@@ -102,4 +133,30 @@ public class MecanumChassis
         this.m_currentCommand = targetCommand;
         this.m_commandParameter = commandParam;
     }
+    public void setRotateCommand(rotateCommands targetCommand, double commandParam)
+    {
+        this.m_rotateCommand = targetCommand;
+        this.m_commandParameter = commandParam;
+    }
+    public void setStrafeCommand(strafeCommands targetCommand, double commandParam)
+    {
+        this.m_strafeCommand = targetCommand;
+        this.m_commandParameter = commandParam;
+    }
+
+     //m_driveTrain.setStrafe(m_driveControl.getAxis(RobotConstants.strafeAxis)*RobotConstants.strafeMultiplier);
+     //m_driveTrain.setTwist(m_driveControl.getAxis(RobotConstants.twistAxis)*RobotConstants.twistMultiplier);
+     //m_driveTrain.setForward(m_driveControl.getAxis(RobotConstants.forwardAxis)*RobotConstants.forwardMultiplier);
+     //m_driveTrain.setThrottle(m_driveControl.getAxis(RobotConstants.throttleAxis)*RobotConstants.throttleMultiplier);
+      //double speed = m_weaponsControl.getAxis(3);
+    // }
+    // m_shooter.setShoot(m_weaponsControl.getAxis(RobotConstants.shootAxis));
+    // m_victor.set(m_weaponsControl.getAxis(RobotConstants.intakeAxis));
+    // if (m_weaponsControl.getButton(1)) {
+    //   m_shooter.rotateY(-0.2);
+    // } else {
+    //   m_shooter.rotateY(m_weaponsControl.getAxis(RobotConstants.aimAxis)/2);
+    // }
+    // m_victor1.set(Math.max(m_weaponsControl.getAxis(RobotConstants.intakeAxis), m_weaponsControl.getAxis(RobotConstants.shootAxis)));
+    
 }

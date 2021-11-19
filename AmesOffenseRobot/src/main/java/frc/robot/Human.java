@@ -12,18 +12,19 @@ package frc.robot;
  */
 public class Human
 {
-    WestCoastChassis m_targChassis;
+    MecanumChassis m_targChassis;
     NewJoystick m_targJoystick;
     double m_forwardSpeed = 0.0;
     double m_twistSpeed = 0.0;
     double m_deadZone = 0.2;
+    double m_strafeSpeed = 0.0;
 
     /**
      * A parameterized constructor for the Human.
      * @param tempChassis The chassis to move the robot.
      * @param tempJoystick The joystick to read values and gather information.
      */
-    public Human(WestCoastChassis tempChassis, NewJoystick tempJoystick)
+    public Human(MecanumChassis tempChassis, NewJoystick tempJoystick)
     {
         this.m_targChassis = tempChassis;
         this.m_targJoystick = tempJoystick;
@@ -40,15 +41,15 @@ public class Human
         //m_theChassis.setVals(m_theJoystick.getForwardAxis(), m_theJoystick.getTwistAxis(), m_theJoystick.getStrafeAxis());
         if (forwardJoystickValue > m_deadZone)
         {
-            m_targChassis.setCommand(WestCoastChassis.chassisCommands.MOVEFORWARD, m_forwardSpeed);
+            m_targChassis.setCommand(MecanumChassis.chassisCommands.MOVEFORWARD, m_forwardSpeed);
         }
         else if (forwardJoystickValue < -m_deadZone)
         {
-            m_targChassis.setCommand(WestCoastChassis.chassisCommands.MOVEBACKWARD, m_forwardSpeed);
+            m_targChassis.setCommand(MecanumChassis.chassisCommands.MOVEBACKWARD, m_forwardSpeed);
         }
         else
         {
-            m_targChassis.setCommand(WestCoastChassis.chassisCommands.DONOTHING, 0.0);
+            m_targChassis.setCommand(MecanumChassis.chassisCommands.DONOTHING, 0.0);
         }
         
         double twistJoystickValue = m_targJoystick.m_twistAxis;
@@ -56,16 +57,33 @@ public class Human
 
         if (twistJoystickValue > m_deadZone)
         {
-            m_targChassis.setRotateCommand(WestCoastChassis.rotateCommands.TURNRIGHT, m_twistSpeed);
+            m_targChassis.setRotateCommand(MecanumChassis.rotateCommands.TURNRIGHT, m_twistSpeed);
         }
         else if (twistJoystickValue < -m_deadZone)
         {
-            m_targChassis.setRotateCommand(WestCoastChassis.rotateCommands.TURNLEFT, m_twistSpeed);
+            m_targChassis.setRotateCommand(MecanumChassis.rotateCommands.TURNLEFT, m_twistSpeed);
         }
         else
         {
-            m_targChassis.setRotateCommand(WestCoastChassis.rotateCommands.NOROTATE, 0.0);
+            m_targChassis.setRotateCommand(MecanumChassis.rotateCommands.NOROTATE, 0.0);
         }
+
+        double strafeJoystickValue = m_targJoystick.m_strafeAxis;
+        m_strafeSpeed = Math.pow(strafeJoystickValue, 2.0);
+
+        if (strafeJoystickValue > m_deadZone)
+        {
+            m_targChassis.setStrafeCommand(MecanumChassis.strafeCommands.STRAFERIGHT, m_strafeSpeed);
+        }
+        else if (strafeJoystickValue < -m_deadZone)
+        {
+            m_targChassis.setStrafeCommand(MecanumChassis.strafeCommands.STRAFELEFT, m_strafeSpeed);
+        }
+        else
+        {
+            m_targChassis.setStrafeCommand(MecanumChassis.strafeCommands.NOSTRAFE, 0.0);
+        }
+
     }
 
     public void setDeadZone(double deadZone) {
