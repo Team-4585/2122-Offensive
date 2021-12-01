@@ -30,6 +30,9 @@ public class RobotConstants {
     public static int forwardAxis = 1;
     public static int twistAxis = 2;
     public static int strafeAxis = 0;
+    public static double twistMultiplier = 0.6;
+    public static double forwardMultiplier = -1;
+    public static double strafeMultiplier = -1;
     //public static int aimAxis = 3;
 
     public static int aimOverrideButton = 1;

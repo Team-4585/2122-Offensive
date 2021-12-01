@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.biblioteca.*;
+import frc.robot.biblioteca.basesubsystem.*;
 
 public class MecanumChassis 
 {
@@ -40,6 +41,8 @@ public class MecanumChassis
     rotateCommands m_rotateCommand = rotateCommands.NOROTATE;
     strafeCommands m_strafeCommand = strafeCommands.NOSTRAFE;
     double m_commandParameter = 0.0;
+    double m_rotateParameter = 0.0;
+    double m_strafeParameter = 0.0;
     
     /**
     A blank constructor
@@ -82,8 +85,6 @@ public class MecanumChassis
             default:
             case DONOTHING:
                 m_driveTrain.setForward(0.0);
-                m_driveTrain.setTwist(0.0);
-                m_driveTrain.setStrafe(0.0);
                 break;
         }
 
@@ -98,20 +99,34 @@ public class MecanumChassis
         switch (m_rotateCommand) {
             case TURNRIGHT:
                 m_driveTrain.setTwist(-m_rotateParameter);
-                m_driveTrain.setInvertRight(false);
-                m_driveTrain.setInvertLeft(false);
+                //m_driveTrain.setInvertRight(false);
+                //m_driveTrain.setInvertLeft(false);
                 break;
             case TURNLEFT:
                 m_driveTrain.setTwist(-m_rotateParameter);
-                m_driveTrain.setInvertRight(true);
-                m_driveTrain.setInvertLeft(true);
+                //m_driveTrain.setInvertRight(true);
+                //m_driveTrain.setInvertLeft(true);
                 break;
             default:
             case NOROTATE:
                 m_driveTrain.setTwist(0.0);
-                m_driveTrain.setInvertRight(false);
-                m_driveTrain.setInvertLeft(false);
+                //m_driveTrain.setInvertRight(false);
+                //m_driveTrain.setInvertLeft(false);
                 break;        
+        }
+    }
+    public void chassisStrafeActions()
+    {
+        switch(m_strafeCommand){
+            case STRAFERIGHT:
+                m_driveTrain.setStrafe(-m_strafeParameter);
+                break;
+            case STRAFELEFT:
+                m_driveTrain.setStrafe(-m_strafeParameter);
+                break;
+            case NOSTRAFE:
+                m_driveTrain.setStrafe(0.0);
+                break;
         }
     }
 
