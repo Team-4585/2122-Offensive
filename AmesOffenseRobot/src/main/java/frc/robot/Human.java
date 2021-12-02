@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import frc.robot.subsystem.shooter.*;
+
 /**
  * A class for the Human, responsible for making all of the calculations after receiving values from the Joystick.
  */
@@ -14,20 +16,28 @@ public class Human
 {
     MecanumChassis m_targChassis;
     NewJoystick m_targJoystick;
+    WeaponsJoystick m_weaponsJoystick;
+    Shooter m_shooter;
     double m_forwardSpeed = 0.0;
     double m_twistSpeed = 0.0;
     double m_deadZone = 0.2;
     double m_strafeSpeed = 0.0;
+    boolean m_button1 = false;
+    boolean m_button2 = false;
 
     /**
      * A parameterized constructor for the Human.
      * @param tempChassis The chassis to move the robot.
      * @param tempJoystick The joystick to read values and gather information.
+     * @param tempWeaponsJoystick The joystick that gets information for the subsystems.
+     * @param tempShooter The shooter that shoots and intakes.
      */
-    public Human(MecanumChassis tempChassis, NewJoystick tempJoystick)
+    public Human(MecanumChassis tempChassis, NewJoystick tempJoystick, WeaponsJoystick tempWeaponsJoystick, Shooter tempShooter)
     {
         this.m_targChassis = tempChassis;
         this.m_targJoystick = tempJoystick;
+        this.m_weaponsJoystick = tempWeaponsJoystick;
+        this.m_shooter = tempShooter;
     }
 
     /**
@@ -82,6 +92,17 @@ public class Human
         else
         {
             m_targChassis.setStrafeCommand(MecanumChassis.strafeCommands.NOSTRAFE, 0.0);
+        }
+
+        m_button1 = m_weaponsJoystick.getButton1();
+        m_button2 = m_weaponsJoystick.getButton2();
+
+        if (m_button1) {
+            m_shooter.shoot();
+        } 
+
+        if (m_button2) {
+            m_shooter.intake();
         }
 
     }

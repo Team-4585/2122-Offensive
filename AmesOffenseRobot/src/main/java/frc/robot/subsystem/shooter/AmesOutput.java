@@ -4,11 +4,10 @@ public class AmesOutput extends Output{
     public AmesOutput(){
 
     }
-    public void engageMotorsInward(){
+    
 
-    }
     public void engageMotorsOutward(){
-
+        System.out.println("Shooting the ball.");
     }
     
 }

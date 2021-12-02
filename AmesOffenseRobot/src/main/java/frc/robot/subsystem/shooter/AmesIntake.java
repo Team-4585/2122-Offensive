@@ -6,11 +6,11 @@ public class AmesIntake extends Intake{
         
     }
     public void engageMotorsInward() {
-
+        System.out.println("Taking in the ball.");
     }
 
     public void engageMotorsOutward () {
-
+        System.out.println("Spitting back out the ball.");
     }
 
 }

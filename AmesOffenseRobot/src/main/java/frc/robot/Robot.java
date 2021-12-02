@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.biblioteca.RoboBaseClass;
+import frc.robot.subsystem.shooter.*;
 
 /**
  * A class to initialize Joystick, Human, and Chassis objects, run commands periodically, and use the main method to communicate with the driver station.
@@ -17,7 +18,9 @@ public class Robot extends TimedRobot
 {
   MecanumChassis m_theChassis;
   NewJoystick m_theJoystick;
+  WeaponsJoystick m_weaponsJoystick;
   Human m_theHuman;
+  Shooter m_shooter;
 
 
   //This is where we initialize our main objects
@@ -39,7 +42,10 @@ public class Robot extends TimedRobot
 
     m_theChassis = new MecanumChassis();
     m_theJoystick = new NewJoystick();
-    m_theHuman = new Human(m_theChassis, m_theJoystick);
+    m_weaponsJoystick = new WeaponsJoystick();
+    m_shooter = new Shooter();
+    m_theHuman = new Human(m_theChassis, m_theJoystick, m_weaponsJoystick, m_shooter);
+    
   }
 
   //This is calling the more specific "constructors" of objects with init methods
@@ -49,7 +55,9 @@ public class Robot extends TimedRobot
   public void initSubsystems()
   {
     m_theJoystick.newJoystickInit();
+    m_weaponsJoystick.weaponsJoystickInit();
     m_theChassis.mecanumChassisInit();
+    m_shooter.shooterInit();
   }
 
   /**
@@ -112,6 +120,7 @@ public class Robot extends TimedRobot
     RoboBaseClass.gatherInfoAll();
     
       m_theJoystick.gatherInformation();  //basically assigns joystick values
+      m_weaponsJoystick.gatherInformation();
       m_theHuman.makeCalculations();
       m_theChassis.chassisDoActions();
       m_theChassis.chassisRotateActions();

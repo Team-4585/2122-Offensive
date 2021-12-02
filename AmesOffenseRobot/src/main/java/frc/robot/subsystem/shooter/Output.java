@@ -6,6 +6,6 @@ public abstract class Output {
     public Output() {
         
     }
-    abstract void engageMotorsInward();
+    
     abstract void engageMotorsOutward();    
 }

@@ -38,8 +38,6 @@ public class NewJoystick
         m_forwardAxis = m_driveControl.getAxis(RobotConstants.forwardAxis);
         m_twistAxis = m_driveControl.getAxis(RobotConstants.twistAxis); 
         m_strafeAxis = m_driveControl.getAxis(RobotConstants.strafeAxis);
-        m_button1 = m_driveControl.getButton(1);
-        m_button2 = m_driveControl.getButton(2);
     } 
 
     /**
@@ -67,23 +65,5 @@ public class NewJoystick
     public double getStrafeAxis()
     {
         return m_strafeAxis;
-    }
-
-    /**
-     * Returns the value of button 1.
-     * @return A boolean value of the pressed status of button 1.
-     */
-    public boolean getButton1()
-    {
-        return m_button1;
-    }
-
-    /**
-     * Returns the value of button 2.
-     * @return A boolean value of the pressed status of button 2.
-     */
-    public boolean getButton2()
-    {
-        return m_button2;
     }
 }
