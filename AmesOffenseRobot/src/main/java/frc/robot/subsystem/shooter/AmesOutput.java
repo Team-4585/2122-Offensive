@@ -4,8 +4,11 @@ public class AmesOutput extends Output{
     public AmesOutput(){
 
     }
-    
+    @Override
+    public void engageMotorsInward(){
 
+    }
+    @Override
     public void engageMotorsOutward(){
         System.out.println("Shooting the ball.");
     }
