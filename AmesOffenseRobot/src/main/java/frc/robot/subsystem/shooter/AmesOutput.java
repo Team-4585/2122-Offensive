@@ -1,8 +1,13 @@
 package frc.robot.subsystem.shooter;
 
 public class AmesOutput extends Output{
-    public AmesOutput(){
+    HuskyVictor leftShooterMotor;
+    HuskyVictor rightShooterMotor;
 
+    public AmesOutput(){
+    leftShooterMotor = new HuskyVictor(0);
+    rightShooterMotor = new HuskyVictor(1);
+    motorSpeed = 0.4;
     }
     @Override
     public void engageMotorsInward(){
@@ -10,7 +15,9 @@ public class AmesOutput extends Output{
     }
     @Override
     public void engageMotorsOutward(){
-        System.out.println("Shooting the ball.");
+    leftShooterMotor.set(motorSpeed);
+    rightShooterMotor.set(motorSpeed);
+   
     }
     
 }
