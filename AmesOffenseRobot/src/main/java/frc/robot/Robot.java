@@ -124,6 +124,7 @@ public class Robot extends TimedRobot
       m_theHuman.makeCalculations();
       m_theChassis.chassisDoActions();
       m_theChassis.chassisRotateActions();
+      m_theChassis.chassisStrafeActions();
 
     RoboBaseClass.doActionsAll();
   }
