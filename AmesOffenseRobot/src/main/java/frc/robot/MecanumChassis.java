@@ -79,12 +79,14 @@ public class MecanumChassis
                 break;
 
             case MOVEBACKWARD:
-                m_driveTrain.setForward(-m_commandParameter);
+                m_driveTrain.setForward(-(m_commandParameter));
                 break;
 
             default:
             case DONOTHING:
                 m_driveTrain.setForward(0.0);
+                m_driveTrain.setTwist(0.0);
+                m_driveTrain.setStrafe(0.0);
                 break;
         }
 
@@ -98,12 +100,12 @@ public class MecanumChassis
     {
         switch (m_rotateCommand) {
             case TURNRIGHT:
-                m_driveTrain.setTwist(-m_rotateParameter);
+                m_driveTrain.setTwist(m_rotateParameter);
                 //m_driveTrain.setInvertRight(false);
                 //m_driveTrain.setInvertLeft(false);
                 break;
             case TURNLEFT:
-                m_driveTrain.setTwist(-m_rotateParameter);
+                m_driveTrain.setTwist(-(m_rotateParameter));
                 //m_driveTrain.setInvertRight(true);
                 //m_driveTrain.setInvertLeft(true);
                 break;
@@ -119,7 +121,7 @@ public class MecanumChassis
     {
         switch(m_strafeCommand){
             case STRAFERIGHT:
-                m_driveTrain.setStrafe(-m_strafeParameter);
+                m_driveTrain.setStrafe(m_strafeParameter);
                 break;
             case STRAFELEFT:
                 m_driveTrain.setStrafe(-m_strafeParameter);
@@ -131,10 +133,10 @@ public class MecanumChassis
     }
 
     public void doActions(){
-        front_left.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe()); 
-        front_right.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe());
-        back_left.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe());
-        back_right.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe());
+        front_left.set(-(m_driveTrain.getForward()) - (m_driveTrain.getTwist() * -1) + m_driveTrain.getStrafe()); 
+        front_right.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * -1) + m_driveTrain.getStrafe());
+        back_left.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1) + m_driveTrain.getStrafe());
+        back_right.set(-(m_driveTrain.getForward()) - (m_driveTrain.getTwist() * 1) + m_driveTrain.getStrafe());
 
 
     }
@@ -160,12 +162,12 @@ public class MecanumChassis
     public void setRotateCommand(rotateCommands targetCommand, double commandParam)
     {
         this.m_rotateCommand = targetCommand;
-        this.m_commandParameter = commandParam;
+        this.m_rotateParameter = commandParam;
     }
     public void setStrafeCommand(strafeCommands targetCommand, double commandParam)
     {
         this.m_strafeCommand = targetCommand;
-        this.m_commandParameter = commandParam;
+        this.m_strafeParameter = commandParam;
     }
 
     public double getForward() {
