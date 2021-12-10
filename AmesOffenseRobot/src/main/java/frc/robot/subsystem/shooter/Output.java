@@ -1,7 +1,7 @@
 package frc.robot.subsystem.shooter;
 
 public abstract class Output {
-    private double motorSpeed;
+    protected double motorSpeed;
     
     public Output() {
         

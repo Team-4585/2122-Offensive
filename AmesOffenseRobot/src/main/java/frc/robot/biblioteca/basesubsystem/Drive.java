@@ -63,4 +63,16 @@ public abstract class Drive extends RoboBaseClass {
         m_invertForward = forward;
     }
 
+    public double getForward() {
+        return m_forward;
+    }
+
+    public double getStrafe() {
+        return m_strafe;
+    }
+
+    public double getTwist() {
+        return m_twist;
+    }
+
 }

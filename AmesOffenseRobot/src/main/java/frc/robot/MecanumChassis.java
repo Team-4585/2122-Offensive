@@ -130,6 +130,15 @@ public class MecanumChassis
         }
     }
 
+    public void doActions(){
+        front_left.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe()); 
+        front_right.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe());
+        back_left.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe());
+        back_right.set(m_driveTrain.getForward() - (m_driveTrain.getTwist() * 1)+ m_driveTrain.getStrafe());
+
+
+    }
+
     /**
     A method that initializes the values of forward, twist, and strafe 
     */
@@ -157,6 +166,18 @@ public class MecanumChassis
     {
         this.m_strafeCommand = targetCommand;
         this.m_commandParameter = commandParam;
+    }
+
+    public double getForward() {
+        return m_driveTrain.getForward();
+    }
+
+    public double getStrafe() {
+        return m_driveTrain.getStrafe();
+    }
+
+    public double getTwist() {
+        return m_driveTrain.getTwist();
     }
 
      //m_driveTrain.setStrafe(m_driveControl.getAxis(RobotConstants.strafeAxis)*RobotConstants.strafeMultiplier);

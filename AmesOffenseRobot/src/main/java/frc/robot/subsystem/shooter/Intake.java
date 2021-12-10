@@ -1,7 +1,7 @@
 package frc.robot.subsystem.shooter;
 
 public abstract class Intake{
-    private double motorSpeed;
+    protected double motorSpeed;
     
     public Intake() {
         

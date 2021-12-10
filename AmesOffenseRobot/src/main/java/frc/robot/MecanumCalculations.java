@@ -1,12 +1,23 @@
 
 package frc.robot;
-import frc.robot.biblioteca;
+import frc.robot.biblioteca.*;
 
 public class MecanumCalculations{
     HuskyTalon frontLeftMotor;
     HuskyTalon frontRightMotor;
     HuskyTalon backLeftMotor;
     HuskyTalon backRightMotor;
+
+    double m_forward;
+    double m_strafe;
+    double m_twist;
+
+    public void mecanumCalculationsInit(double forward, double strafe, double twist) {
+        m_forward = forward;
+        m_strafe = strafe;
+        m_twist = twist;
+    }
+
     public MecanumCalculations(HuskyTalon front_left, HuskyTalon front_right, HuskyTalon back_left, HuskyTalon back_right){
         frontLeftMotor = front_left;
         frontRightMotor = front_right;
@@ -15,14 +26,7 @@ public class MecanumCalculations{
 
     }
     
-    public void engageMotors(){
-        frontLeftMotor.set(m_forward - (m_twist * 1)+ m_strafe); 
-        frontRightMotor.set(m_forward - (m_twist * 1)+ m_strafe);
-        backLeftMotor.set(m_forward - (m_twist * 1)+ m_strafe);
-        backRightMotor.set(m_forward - (m_twist * 1)+ m_strafe);
-
-
-    }
+    
 
 
 }

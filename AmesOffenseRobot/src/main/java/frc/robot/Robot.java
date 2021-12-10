@@ -46,7 +46,7 @@ public class Robot extends TimedRobot
     m_weaponsJoystick = new WeaponsJoystick();
     m_shooter = new Shooter();
     m_theHuman = new Human(m_theChassis, m_theJoystick, m_weaponsJoystick, m_shooter);
-    m_driveCalculations = new MecanumCalculations(m_theChassis.front_left, m_theChassis.front_right, m_theChassis.back_left, m_theChassis.back_right);
+    
   }
 
   //This is calling the more specific "constructors" of objects with init methods
@@ -59,6 +59,9 @@ public class Robot extends TimedRobot
     m_weaponsJoystick.weaponsJoystickInit();
     m_theChassis.mecanumChassisInit();
     m_shooter.shooterInit();
+    m_driveCalculations = new MecanumCalculations(m_theChassis.front_left, m_theChassis.front_right, m_theChassis.back_left, m_theChassis.back_right);
+    m_driveCalculations.mecanumCalculationsInit(m_theChassis.getForward(), m_theChassis.getStrafe(), m_theChassis.getTwist());
+  
   }
 
   /**
@@ -126,7 +129,8 @@ public class Robot extends TimedRobot
       m_theChassis.chassisDoActions();
       m_theChassis.chassisRotateActions();
       m_theChassis.chassisStrafeActions();
-      m_driveCalculations.engageMotors();
+      m_theChassis.doActions();
+      // m_driveCalculations.doActions();
 
     RoboBaseClass.doActionsAll();
   }
