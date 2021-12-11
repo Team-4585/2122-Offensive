@@ -98,10 +98,22 @@ public class Human
         m_button2 = m_weaponsJoystick.getButton2();
 
         if (m_button1) {
+            m_shooter.getOutput().restoreMotorSpeed();
             m_shooter.shoot();
         } 
+        else
+        {
+            m_shooter.getOutput().resetMotorSpeed();
+            m_shooter.shoot();
+        }
 
         if (m_button2) {
+            m_shooter.getIntake().restoreIntakeMotorSpeed();
+            m_shooter.intake();
+        }
+        else
+        {
+            m_shooter.getIntake().resetIntakeMotorSpeed();
             m_shooter.intake();
         }
 

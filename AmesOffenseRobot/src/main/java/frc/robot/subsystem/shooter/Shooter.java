@@ -12,10 +12,18 @@ public class Shooter {
         intake = new AmesIntake();
         output = new AmesOutput();
     }
-
     
 
 
+public AmesIntake getIntake()
+{
+    return intake;
+}
+
+public AmesOutput getOutput()
+{
+    return output;
+}
     public void shoot() {
         output.engageMotorsOutward();
     }
